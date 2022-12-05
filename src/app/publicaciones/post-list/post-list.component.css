@@ -1,0 +1,37 @@
+:host{
+  display: block;
+  margin-top: 1rem;
+}
+
+.info-text{
+  text-align: center;
+}
+
+.post-image{
+  width: 70%;
+}
+
+.post-image img{
+  width: 100%;
+  box-shadow: 1px 1px 5px rgba(0,0,0.5);
+}
+
+mar-accordion{
+  width: 50%;
+}
+
+#h1{
+  text-align: center;
+  width: 50%;
+  margin: auto;
+}
+
+#list{
+  margin: auto;
+  width: 70%;
+}
+
+#buscador{
+  margin-left: 10rem;
+  display: flex;
+}

@@ -1,0 +1,80 @@
+<mat-card>
+  <h1>Creación de personajes</h1>
+</mat-card>
+<br>
+<mat-card>
+  <mat-spinner *ngIf = "isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf = "!isLoading">
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      formControlName="name"
+      placeholder="Nombre">
+      <mat-error *ngIf="form.get('name').invalid">Por favor ingrese un nombre</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      formControlName="hair"
+      placeholder="Color de pelo:">
+      <mat-error *ngIf="form.get('hair').invalid">Por favor ingrese color de pelo</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      formControlName="eyes"
+      placeholder="Color de ojos">
+      <mat-error *ngIf="form.get('eyes').invalid">Por favor ingrese color de ojos</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      formControlName="age"
+      placeholder="Edad">
+      <mat-error *ngIf="form.get('age').invalid">Por favor ingrese la edad</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      formControlName="power"
+      placeholder="Poder">
+      <mat-error *ngIf="form.get('power').invalid">Por favor ingrese un poder</mat-error>
+    </mat-form-field>
+    <mat-form-field >
+      <p>Género</p>
+      <select matNativeControl required formControlName="genre">
+        <option value="Acción">Acción</option>
+        <option value="Comedia">Comedia</option>
+        <option value="Fantasía">Fantasía</option>
+        <option value="Horror">Horror</option>
+        <option value="Romance">Romance</option>
+        <option value="Sobrenatural">Sobrenatural</option>
+      </select>
+    </mat-form-field>
+    <div>
+      <p>Escenario</p>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Selecciona Imagen</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" [alt]="form.value.name">
+    </div>
+    <div>
+      <button
+      id="random"
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="onRandomPost()">Random</button>
+      <button
+      mat-raised-button
+      color="warn"
+      type="submit">Guardar Post</button>
+    </div>
+  </form>
+</mat-card>

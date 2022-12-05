@@ -1,0 +1,63 @@
+<mat-card id="h1">
+  <h1 *ngIf="link == '/list'">Todos los Personajes</h1>
+  <h1 *ngIf="link == '/accion'">Acción</h1>
+  <h1 *ngIf="link == '/comedia'">Comedia</h1>
+  <h1 *ngIf="link == '/fantasia'">Fantasía</h1>
+  <h1 *ngIf="link == '/horror'">Horror</h1>
+  <h1 *ngIf="link == '/romance'">Romance</h1>
+  <h1 *ngIf="link == '/sobrenatural'">Sobrenatural</h1>
+</mat-card>
+<br>
+<div id="buscador" *ngIf="link == '/list'">
+  <h3>Buscador: </h3>
+  <input [(ngModel)]="search" type="text" style="height: 1rem; margin-left:1rem;" >
+</div>
+<br>
+<mat-spinner style="margin:auto;" *ngIf="isLoading"></mat-spinner>
+<mat-card id="list">
+
+<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel-header *ngIf="search == post.name || search == post.hair || search == post.eyes || search == post.age || search == post.power || search == post.genre" >
+      {{post.lastName}} {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="link == '/accion' && post.genre == 'Acción'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="link == '/comedia' && post.genre == 'Comedia'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="link == '/fantasia' && post.genre == 'Fantasía'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="link == '/horror' && post.genre == 'Horror'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="link == '/romance' && post.genre == 'Romance'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="link == '/sobrenatural' && post.genre == 'Sobrenatural'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="search == '' && link == '/list'">
+      {{post.name}}
+    </mat-expansion-panel-header>
+      <p>Color de pelo: {{post.hair}}</p>
+      <p>Color de ojos: {{post.eyes}}</p>
+      <p>Edad: {{post.age}}</p>
+      <p>Poder: {{post.power}}</p>
+      <p>Género: {{post.genre}}</p>
+      <div class="post-image">
+        <img [src]="post.imagePath" alt="post.name">
+      </div>
+      <mat-action-row>
+        <a mat-button color="primary" [routerLink]="['/edit', post.id]">Editar</a>
+        <button type="button" (click)="deleteDocument(post.id)" mat-button color="warn">Eliminar</button>
+      </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">
+<br>
+No hay publicaciones agregadas
+</p>
+</mat-card>
